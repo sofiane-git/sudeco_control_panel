@@ -1,0 +1,69 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    /* GENERAL */
+    .btn {
+        @apply rounded w-1/2 self-center text-sm py-2 transition-colors focus:outline-none disabled:opacity-50;
+    }
+
+    .btn-blue {
+        @apply bg-blue-200 text-blue-800 border border-blue-400 ;
+    }
+    
+    .btn-blue:enabled:hover {
+        @apply bg-blue-600 text-blue-50;
+    }
+
+    .btn-orange {
+        @apply bg-orange-200 text-orange-800 border border-orange-400;
+    }
+
+    .btn-orange:enabled:hover {
+        @apply bg-orange-600 text-orange-50;
+    }
+
+    .btn-gray {
+        @apply bg-gray-200 text-black text-opacity-70 hover:bg-gray-300;
+    }
+
+
+    .inputForm {
+        @apply rounded border p-2 text-sm focus:shadow-lg border-gray-500 focus:outline-none focus:ring-1 focus:border-blue-300  w-3/4 my-1;
+    }
+
+
+    .errorMessage {
+        @apply text-center text-red-500 text-sm;
+    }
+
+    .titleForm {
+        @apply mx-2 cursor-pointer text-center hover:opacity-75 transition-all origin-center;
+    }
+
+    /* ATOMIC DESIGN */
+    .a-button {
+        @apply p-1 my-1 flex justify-center items-center border rounded hover:shadow active:shadow-inner;
+    }
+    .a-label {
+        @apply flex items-center absolute top-[-2px] left-2 px-0.5 bg-white text-gray-400 transition-all text-[0.5rem];
+    }
+    .a-input {
+        @apply border rounded px-2.5 py-2.5 w-full capitalize placeholder:normal-case bg-white hover:shadow placeholder:opacity-50 focus:border-blue-200 focus:outline-0 focus:shadow-sm placeholder:text-sm focus:placeholder:opacity-0 active:shadow-inner transition-all disabled:shadow-none disabled:border-none disabled:bg-inherit;
+    }
+    .a-input-checkbox {
+        @apply cursor-pointer hover:shadow-md active:shadow-inner mx-1;
+    }
+    .a-navlink {
+        @apply px-2 border-0 rounded active:bg-gray-50 active:shadow-inner hover:shadow;
+    }
+
+    .o-password-input-icon {
+        @apply cursor-pointer h-4 transition-all hover:scale-110 active:stroke-gray-500;
+    }
+}
+
+/* div {
+    background-color: #fdfdfd;
+} */
