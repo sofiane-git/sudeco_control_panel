@@ -11,7 +11,7 @@
     .btn-blue {
         @apply bg-blue-200 text-blue-800 border border-blue-400 ;
     }
-    
+
     .btn-blue:enabled:hover {
         @apply bg-blue-600 text-blue-50;
     }
@@ -46,22 +46,44 @@
     .a-button {
         @apply p-1 my-1 flex justify-center items-center border rounded hover:shadow active:shadow-inner;
     }
+
     .a-label {
         @apply flex items-center absolute top-[-2px] left-2 px-0.5 bg-white text-gray-400 transition-all text-[0.5rem];
     }
+
     .a-input {
         @apply border rounded px-2.5 py-2.5 w-full capitalize placeholder:normal-case bg-white hover:shadow placeholder:opacity-50 focus:border-blue-200 focus:outline-0 focus:shadow-sm placeholder:text-sm focus:placeholder:opacity-0 active:shadow-inner transition-all disabled:shadow-none disabled:border-none disabled:bg-inherit;
     }
+
     .a-input-checkbox {
         @apply cursor-pointer hover:shadow-md active:shadow-inner mx-1;
     }
+
     .a-navlink {
-        @apply px-2 border-0 rounded active:bg-gray-50 active:shadow-inner hover:shadow;
+        @apply relative mx-4 px-1 border-0 rounded text-blue-300 active:text-blue-300 active:shadow-inner hover:shadow hover:text-white;
     }
 
     .o-password-input-icon {
         @apply cursor-pointer h-4 transition-all hover:scale-110 active:stroke-gray-500;
     }
+
+}
+
+.a-navlink::after {
+    position: absolute;
+    top: -5px;
+    left: 0;
+    content: "";
+    height: 1px;
+    width: 100%;
+    background-color: rgb(147 197 253);
+    transform-origin: center center;
+    transform: scale(0);
+    transition: 0.5s ease-in-out;
+}
+
+.a-navlink:hover::after {
+    transform: scale(1);
 }
 
 /* div {

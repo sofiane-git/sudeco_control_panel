@@ -3,8 +3,7 @@
     <NavLink
       v-for="item in links"
       :to="item.path"
-      :value="modelValue"
-      @click="$emit('update:modelValue', item.title)"
+      @click="storeOnSessionStorage(item)"
     >
       {{ item.title }}
     </NavLink>
@@ -20,6 +19,9 @@ interface NavItem {
 
 defineProps<{
   links: NavItem[];
-  modelValue?: any;
 }>();
+
+const storeOnSessionStorage = (item: NavItem): void => {
+  sessionStorage.setItem("Location", JSON.stringify(item));
+};
 </script>

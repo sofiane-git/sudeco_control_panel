@@ -1,5 +1,7 @@
 <template>
-  <div class="bg-gray-800 w-[98%] mx-auto h-64 rounded-t-lg">
+  <div
+    class="bg-gray-800 w-[98%] mx-auto h-64 rounded-t-lg shadow-black shadow-sm"
+  >
     <div class="w-[95%] border-b h-14 mx-auto flex items-center">
       <Image
         src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg"
@@ -7,11 +9,7 @@
         class="h-8 w-8"
       />
       <div class="ml-6 flex-1">
-        <NavBar
-          v-model="titleOfNavLinkSelectioned"
-          :links="links"
-          @click="displayTitleValue"
-        />
+        <NavBar :links="links" />
       </div>
       <ButtonWithIcon
         icon-type="outline"
@@ -24,7 +22,8 @@
       <Text
         tag="h2"
         class="text-white text-4xl w-11/12 mx-auto mt-8 drop-shadow-2xl shadow-white"
-        >{{ titleOfNavLinkSelectioned }}
+      >
+        {{ displayText() }}
       </Text>
     </div>
   </div>
@@ -34,7 +33,6 @@
 import { Image, Text } from "@/components/atoms";
 import { NavBar, ButtonWithIcon } from "@/components/molecules";
 import icons from "assets/icons";
-import { ref, watch } from "vue";
 
 const links = [
   {
@@ -42,24 +40,29 @@ const links = [
     title: "Tableau de bord",
   },
   {
-    path: "/",
+    path: "/invoice",
     title: "Facture",
   },
   {
-    path: "/",
+    path: "/quotation",
     title: "Devis",
   },
   {
-    path: "/",
+    path: "/comptability",
     title: "Comptabilité",
   },
 ];
 
-const titleOfNavLinkSelectioned = ref("Tableau de bord");
-const displayTitleValue = () => {
-  console.log(titleOfNavLinkSelectioned.value);
+const displayText = () => {
+  if (sessionStorage.getItem("Location")) {
+    const locationOnSessionStorageStringify =
+      sessionStorage.getItem("Location");
+    const locationOnSessionStorage = JSON.parse(
+      locationOnSessionStorageStringify
+    );
+    return locationOnSessionStorage.title;
+  } else {
+    return "Sudeco";
+  }
 };
-watch(titleOfNavLinkSelectioned, () => {
-  console.log(titleOfNavLinkSelectioned.value);
-});
 </script>
