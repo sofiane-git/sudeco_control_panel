@@ -9,6 +9,17 @@ import {
 import { setActivePinia, createPinia } from "pinia";
 import { useTodoStore } from "../../store/todo";
 
+const getFirstTodoId = (store: ReturnType<typeof useTodoStore>) =>
+  store.items[0].id;
+
+const itemToReturn = (label: string, id: string = expect.any(String)) => ({
+  id,
+  label,
+  done: false,
+  createdAt: expect.any(Date),
+  updatedAt: expect.any(Date),
+});
+
 beforeAll(() => {
   setActivePinia(createPinia());
 });
@@ -22,26 +33,30 @@ describe("Todo Pinia Store", () => {
   afterEach(() => {
     store.$reset();
   });
+
   test("store initialized", () => {
     expect(store).toBeDefined();
   });
+
   test("initialize with empty items", () => {
     expect(store.items).toStrictEqual([]);
   });
 
-  test("createTodo", () => {
-    store.add({ title: "create test" });
+  test("add a todo", () => {
+    store.add({ label: "create test" });
     const todo = store.items[0];
-    expect(todo.title).toStrictEqual("create test");
+    expect(todo).toStrictEqual(itemToReturn("create test"));
   });
 
   test("getById", () => {
-    store.add({ title: "Test" });
-    const item = store.items[0];
-    const todo = store.getById(item.id);
+    store.add({ label: "Test GetById" });
+    const id = getFirstTodoId(store);
 
-    expect(todo).toStrictEqual(item);
+    const todo = store.getById(id);
+
+    expect(todo).toStrictEqual(itemToReturn("Test GetById", id));
   });
+
   test("getOrderedTodos", () => {
     const items = [
       {
@@ -54,7 +69,6 @@ describe("Todo Pinia Store", () => {
         createdAt: new Date(2022, 2, 14),
       },
     ];
-
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     store.items = items;
@@ -65,23 +79,49 @@ describe("Todo Pinia Store", () => {
     expect(orderedTodos[1].createdAt.getFullYear()).toBe(2021);
     expect(orderedTodos[2].createdAt.getFullYear()).toBe(2022);
   });
-  test("updateTodo", () => {
-    store.add({ title: "Test" });
-    const todo = store.items[0];
 
-    store.update(todo.id, { title: "updated", done: true, content: "blabla" });
+  test("updateTodo", () => {
+    store.add({ label: "Test" });
+    const id = getFirstTodoId(store);
+
+    store.update(id, { label: "updated", done: true, content: "blabla" });
     const updated = store.items[0];
 
-    expect(updated.title).toStrictEqual("updated");
+    expect(updated.label).toStrictEqual("updated");
     expect(updated.done).toBe(true);
     expect(updated.content).toStrictEqual("blabla");
   });
-  test("deleteTodo", () => {
-    store.add({ title: "test" });
-    const todo = store.items[0];
 
-    store.delete(todo.id);
+  test("deleteTodo where is alone", () => {
+    store.add({ label: "test" });
+    const id = getFirstTodoId(store);
+
+    store.remove(id);
 
     expect(store.items).toStrictEqual([]);
+  });
+
+  test("deleteTodo where is not alone", () => {
+    store.add({ label: "test 1" });
+    store.add({ label: "test 2" });
+    store.add({ label: "test 3" });
+    store.add({ label: "test 4" });
+
+    let id = getFirstTodoId(store);
+    store.remove(id);
+
+    expect(store.items).toStrictEqual([
+      itemToReturn("test 2"),
+      itemToReturn("test 3"),
+      itemToReturn("test 4"),
+    ]);
+
+    id = store.items[1].id;
+    store.remove(id);
+
+    expect(store.items).toStrictEqual([
+      itemToReturn("test 2"),
+      itemToReturn("test 4"),
+    ]);
   });
 });

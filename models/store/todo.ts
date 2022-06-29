@@ -1,6 +1,6 @@
 export interface Todo {
   id: string;
-  title: string;
+  label: string;
   content?: string | undefined;
   done: boolean;
   createdAt: Date;
@@ -9,18 +9,19 @@ export interface Todo {
   updatedBy?: string | undefined;
 }
 
+export type Todos = Todo[] | undefined[];
+
 export interface TodoState {
-  items: Todo[];
+  items: Todos;
 }
 
 export interface TodoAdd {
-  title: string;
+  label: string;
   content?: string | undefined;
-  createdAt?: Date | undefined;
 }
 
 export interface TodoUpdate {
-  title?: string;
+  label?: string;
   content?: string;
   done?: boolean;
 }
