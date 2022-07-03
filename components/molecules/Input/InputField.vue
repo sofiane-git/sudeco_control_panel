@@ -8,12 +8,14 @@
     </Text>
     <Input
       :id="id"
+      v-model="localState"
       :type="inputType"
       :placeholder="placeholder ? placeholder : labelContent"
       :name="name"
       :disabled="disabled"
       :input-custom-class="inputCustomClass"
-      :value="modelValue"
+      :error="error"
+      :list="list"
       @focus="onFocus = true"
       @focusout="
         $event.target?.value.trim()
@@ -51,8 +53,8 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
-import { Text, Input, IconSVG } from "../../atoms";
-import icons from "assets/icons";
+import { Text, Input, IconSVG } from "@/components/atoms";
+import icons from "@/assets/icons";
 
 const props = defineProps<{
   modelValue?: any;
@@ -63,7 +65,22 @@ const props = defineProps<{
   inputType: "text" | "email" | "password";
   inputCustomClass?: string;
   disabled?: boolean;
+  error: boolean;
+  list?: any;
 }>();
+
+const emit = defineEmits<{
+  (e: "update:modelValue", value: string): void;
+}>();
+
+const localState = computed({
+  get() {
+    return props.modelValue;
+  },
+  set(value) {
+    emit("update:modelValue", value);
+  },
+});
 
 // SHOW ICON (EYE) IF TYPE IS PASSWORD
 const inputTypePassword = ref(false);

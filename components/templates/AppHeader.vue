@@ -1,8 +1,8 @@
 <template>
   <div
-    class="bg-gray-800 w-[98%] mx-auto h-64 rounded-t-lg shadow-black shadow-sm"
+    class="col-start-1 md:col-start-2 col-span-full md:col-span-10 row-start-1 bg-gray-800 h-64 rounded-t-lg shadow-black shadow-sm"
   >
-    <div class="w-[95%] border-b h-14 mx-auto flex items-center">
+    <div class="border-b px-2 h-14 mx-auto flex items-center">
       <Image
         src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg"
         alt="Logo"
@@ -19,10 +19,7 @@
       />
     </div>
     <div>
-      <Text
-        tag="h2"
-        class="text-white text-4xl w-11/12 mx-auto mt-8 drop-shadow-2xl shadow-white"
-      >
+      <Text tag="h2" class="text-white text-4xl w-11/12 mx-auto mt-4">
         {{ displayText() }}
       </Text>
     </div>

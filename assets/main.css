@@ -60,7 +60,11 @@
     }
 
     .a-navlink {
-        @apply relative mx-4 px-1 border-0 rounded text-blue-300 active:text-blue-300 active:shadow-inner hover:shadow hover:text-white;
+        @apply relative mx-1 md:mx-4 px-1 border-0 rounded text-blue-100 active:text-blue-300 active:shadow-inner hover:shadow hover:text-white hover:before:hover:w-6 hover:before:scale-100;
+    }
+
+    .a-navlink::before {
+        @apply absolute -bottom-1 -right-0 sm:-right-0.5 md:-right-1 content-[''] h-[1px] w-0 bg-blue-300 origin-center scale-0 duration-200 ease-in-out
     }
 
     .o-password-input-icon {
@@ -69,23 +73,6 @@
 
 }
 
-.a-navlink::after {
-    position: absolute;
-    top: -5px;
-    left: 0;
-    content: "";
-    height: 1px;
-    width: 100%;
-    background-color: rgb(147 197 253);
-    transform-origin: center center;
-    transform: scale(0);
-    transition: 0.5s ease-in-out;
+tbody > tr:nth-child(odd) {
+    background: lightgray;
 }
-
-.a-navlink:hover::after {
-    transform: scale(1);
-}
-
-/* div {
-    background-color: #fdfdfd;
-} */

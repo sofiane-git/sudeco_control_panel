@@ -32,6 +32,7 @@ const actions = {
       updatedAt: new Date(),
     };
     this.items.push(itemToAdd);
+    console.log(this.items);
   },
   update(id: string, update: TodoUpdate) {
     const items: Todos = this.items;

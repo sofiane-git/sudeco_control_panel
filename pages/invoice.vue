@@ -1,7 +1,9 @@
 <template>
   <NuxtLayout>
-    <h1 class="text-center">Facture</h1>
+    <Create />
   </NuxtLayout>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { Create } from "@/components/templates";
+</script>

@@ -13,6 +13,6 @@
 defineProps<{
   customButtonClass?: string;
   editDisabled?: boolean;
-  type?: "submit" | "button";
+  type?: "submit";
 }>();
 </script>

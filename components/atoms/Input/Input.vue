@@ -11,12 +11,13 @@
     :disabled="disabled"
     :checked="ckboxChecked"
     autocomplete="off"
+    :list="list"
   />
 </template>
 
 <script setup lang="ts">
-type InputType = "text" | "email" | "password" | "checkbox";
-defineProps<{
+type InputType = "text" | "email" | "password" | "checkbox" | "s";
+const props = defineProps<{
   id?: string;
   type: InputType;
   name?: string;
@@ -24,5 +25,6 @@ defineProps<{
   placeholder?: string;
   disabled?: boolean;
   ckboxChecked?: boolean;
+  list?: any;
 }>();
 </script>
